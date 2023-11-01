@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, Response
 import pandas as pd
 import jellyfish
+import webbrowser as wb
+
 
 app = Flask(__name__)
 
@@ -101,4 +103,5 @@ def calculate_average_score():
     return 0.0
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    wb.open_new_tab('http://127.0.0.1:5000')
+    app.run()
