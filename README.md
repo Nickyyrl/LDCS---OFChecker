@@ -5,5 +5,9 @@ ONLY FOR OPPORTUNITIES ATM !
 
 Fixes : 
 
-Settings System to modify Tolerance and Pattern 
-Settings Visualization 
+Pattern Addition, 
+
+Column of CSV Selector if possible,
+
+
+Current Version : Beta v2.0.2
