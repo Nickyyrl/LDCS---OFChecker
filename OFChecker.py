@@ -14,7 +14,7 @@ last_element = ""
 last_score = 0.0
 all_elements = []
 
-tolerance = 0.477
+tolerance = 0.5
 example_pattern = " "
 fn=" "
 
@@ -23,14 +23,27 @@ def index():
     all_patterns = load_patterns()
     return render_template('index.html', elements_tested=elements_tested, last_element=last_element, last_score=last_score, average_score=calculate_average_score(), valid_count=valid_count, invalid_count=invalid_count, all_elements=all_elements, all_patterns=all_patterns, tolerance=tolerance, fn=fn)
 
+@app.route('/get_pattern')
+def get_pattern():
+    return example_pattern
+
+@app.route('/get_tolerance')
+def get_tolerance():
+    return str(tolerance)
+
+@app.route('/get_filename')
+def get_filename():
+    return fn
+
 
 @app.route('/save_settings', methods=['POST'])
 def save_settings():
     global tolerance, example_pattern
+    print(tolerance, example_pattern)
 
-    selected_pattern = request.form.get('selected_pattern')
-    new_pattern = request.form.get('new_pattern')
-    new_tolerance = float(request.form.get('tolerance'))
+    selected_pattern = request.form.get('selectedPattern')
+    new_pattern = request.form.get('newPatternValue')
+    new_tolerance = float(request.form.get('toleranceValue'))
 
     if selected_pattern:
         example_pattern = selected_pattern
@@ -38,8 +51,9 @@ def save_settings():
         all_patterns.append(new_pattern)
 
     tolerance = new_tolerance
+    print(tolerance, example_pattern)
 
-    save_settings_to_file(all_patterns, tolerance)
+    save_settings_to_file(all_patterns)
 
     return redirect(url_for('index'))
 
@@ -55,7 +69,7 @@ def process_csv():
         if uploaded_file.filename != '':
             print(f"File uploaded: {uploaded_file.filename}")
             fn = uploaded_file.filename
-            # Load the CSV file
+            print(fn)
             df = pd.read_csv(uploaded_file, encoding='latin1')
 
 

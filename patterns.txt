@@ -1,1 +1,1 @@
-default_pattern = "CKA/GKA - Product brand - End User / Project name - destination country - 123456"
+CKA/GKA - Product brand - End User / Project name - destination country - 123456

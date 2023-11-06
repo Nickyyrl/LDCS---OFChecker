@@ -3,6 +3,8 @@
 <head>
     <title>LDCS - OFChecker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
             background-color: #f2f2f2; /* Couleur de fond */
@@ -116,7 +118,7 @@
             cursor: pointer;
             position: relative;
             object-position: right;
-            top: -447px;
+            top: -431px;
             left: 150px;
             font-size: 16px;
     }
@@ -263,9 +265,9 @@
                     
             position: relative;
             object-position: right;
-            top: 300px;
+            top: 410px;
             right: -1250px;
-            width: 200px;
+            width: 250px;
             background-color: white;
             padding: 20px;
             font-size: 14px;
@@ -319,7 +321,41 @@
         
         }
 
+        /* Style de la boîte de confirmation */
+        .confirmation-message {
+            display: none; /* Par défaut, la boîte est cachée */
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50; /* Couleur de fond verte */
+            color: white; /* Couleur du texte en blanc */
+            padding: 10px 20px; /* Espacement du texte */
+            border-radius: 5px; /* Coins arrondis */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+            z-index: 999; /* Assure que la boîte est au-dessus de tout le contenu */
+            text-align: center;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards; /* Centrer le texte */
+        }
 
+        /* Animation d'entrée (facultatif) */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .fade-out {
+            animation-name: fadeOut;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
     </style>
 </head>
 <body>
@@ -336,6 +372,31 @@
         </span>
         <p><strong>Current Pattern : </strong> <span id="currentPattern"> {{ example_pattern }}</span></p>
         <p><strong>Current Tolerance : </strong> <span id="currentTolerance">{{ tolerance }} </span></p>
+        <script>
+            $(document).ready(function() {
+                // Fonction pour mettre à jour la valeur de la tolérance
+                function updateTolerance() {
+                    $.get('/get_tolerance', function(data) {
+                        $('#currentTolerance').text(data);
+                    });
+                }
+
+                // Fonction pour mettre à jour la valeur du pattern
+                function updatePattern() {
+                    $.get('/get_pattern', function(data) {
+                        $('#currentPattern').text(data);
+                    });
+                }
+
+                // Mettre à jour les valeurs au chargement de la page
+                updateTolerance();
+                updatePattern();
+
+                // Mettre à jour les valeurs périodiquement
+                setInterval(updateTolerance, 1000);  // Met à jour la tolérance toutes les 5 secondes
+                setInterval(updatePattern, 1000);    // Met à jour le pattern toutes les 5 secondes
+            });
+        </script>
     </div>
 
     <div class="container">
@@ -344,7 +405,7 @@
             <input type="submit" value="Analyze CSV">
         </form>
         <div class="compte">
-            <h3>Current File : </h3><span>{{ fn }}</span>
+            <h3>Overall Statistic on File : </h3>
             <p><strong>Valid Count:</strong> {{ valid_count }}</p>
             <p><strong>Invalid Count:</strong> {{ invalid_count }}</p>
             <p><strong>Elements Tested:</strong> {{ elements_tested }}</p>
@@ -377,9 +438,62 @@
         <span id="toleranceValue">{{ tolerance }}</span>
         <br>
         <br>
-        <button id="saveSettingsButton">Save Settings</button>
+        <button id="saveSettingsButton" type="button">Save Settings</button>
         <a href="https://github.com/Nickyyrl/LDCS---OFChecker" target="_blank" id="support">Support on GitHub 🖳</a>
+        
+        <script type="text/javascript">
+            // JavaScript pour gérer la pop-up
+            var popup = document.getElementById("popup");
+            var openPopupButton = document.getElementById("openPopupButton");
+            var patternSelect = document.getElementById("patternSelect");
+            var newPattern = document.getElementById("newPattern");
+            var toleranceRange = document.getElementById("toleranceRange");
+            var toleranceValue = document.getElementById("toleranceValue");
+            var saveSettingsButton = document.getElementById("saveSettingsButton");
+
+            openPopupButton.onclick = function() {
+                popup.style.display = "block";
+            }
+
+            saveSettingsButton.onclick = function() {
+                // Récupérer les valeurs de la pop-up
+                var selectedPattern = patternSelect.value;
+                var newPatternValue = newPattern.value;
+                var toleranceValue = toleranceRange.value;
+
+
+                // Envoyer les valeurs au serveur (vous devez ajouter cette partie côté serveur)
+                    $.post('/save_settings', {
+                        selectedPattern: selectedPattern,
+                        newPatternValue: newPatternValue,
+                        toleranceValue: toleranceValue
+                    }, function(data) {
+                        // Optionnel : Gérer la réponse du serveur (par exemple, afficher un message de confirmation)
+                        var confirmationMessage = document.getElementById('confirmationMessage');
+                            confirmationMessage.style.display = 'block';
+
+                            // Masquer la pop-up après un court délai (par exemple, 2 secondes)
+                            setTimeout(function() {
+                                confirmationMessage.style.display = 'none';
+                                popup.style.display = 'none';
+                            }, 2000); // 2000 millisecondes (2 secondes)
+
+                                        });
+                                    // Masquer la pop-up
+                                    popup.style.display = "none";
+                                }
+
+                                // Mettre à jour la valeur de tolérance en temps réel
+                                toleranceRange.oninput = function() {
+                                    toleranceValue.innerHTML = toleranceRange.value;
+                                }
+
+        </script>
     </div>
+
+    <div id="confirmationMessage" class="confirmation-message">
+            Settings saved successfully!
+        </div>
 
         <div id="confirmation-modal" class="modal">
             <div class="modal-content">
@@ -403,36 +517,7 @@
     </div>
 </body>
 <script>
-    // JavaScript pour gérer la pop-up
-        var popup = document.getElementById("popup");
-        var openPopupButton = document.getElementById("openPopupButton");
-        var patternSelect = document.getElementById("patternSelect");
-        var newPattern = document.getElementById("newPattern");
-        var toleranceRange = document.getElementById("toleranceRange");
-        var toleranceValue = document.getElementById("toleranceValue");
-        var saveSettingsButton = document.getElementById("saveSettingsButton");
-
-        openPopupButton.onclick = function() {
-            popup.style.display = "block";
-        }
-
-        saveSettingsButton.onclick = function() {
-            // Récupérer les valeurs de la pop-up
-            var selectedPattern = patternSelect.value;
-            var newPatternValue = newPattern.value;
-            var toleranceValue = toleranceRange.value;
-
-            // Envoyer les valeurs au serveur (vous devez ajouter cette partie côté serveur)
-
-            // Masquer la pop-up
-            popup.style.display = "none";
-        }
-
-        // Mettre à jour la valeur de tolérance en temps réel
-        toleranceRange.oninput = function() {
-            toleranceValue.innerHTML = toleranceRange.value;
-        }
-
+    
 function openConfirmationModal() {
     var modal = document.getElementById('confirmation-modal');
     modal.style.display = 'block';
