@@ -9,5 +9,10 @@ Fixes :
 	•	Pattern Addition
 	•	Column of CSV Selector (if possible)
 
+Coming Changes : 
+
+    •   CSV Column Selector
+
+
 Current Version : Beta v2.0.2
 
