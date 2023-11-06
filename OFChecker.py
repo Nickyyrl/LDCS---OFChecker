@@ -16,11 +16,13 @@ all_elements = []
 
 tolerance = 0.477
 example_pattern = " "
+fn=" "
 
 @app.route('/')
 def index():
     all_patterns = load_patterns()
-    return render_template('index.html', elements_tested=elements_tested, last_element=last_element, last_score=last_score, average_score=calculate_average_score(), valid_count=valid_count, invalid_count=invalid_count, all_elements=all_elements, all_patterns=all_patterns, tolerance=tolerance)
+    return render_template('index.html', elements_tested=elements_tested, last_element=last_element, last_score=last_score, average_score=calculate_average_score(), valid_count=valid_count, invalid_count=invalid_count, all_elements=all_elements, all_patterns=all_patterns, tolerance=tolerance, fn=fn)
+
 
 @app.route('/save_settings', methods=['POST'])
 def save_settings():
@@ -52,6 +54,7 @@ def process_csv():
         uploaded_file = request.files['file']
         if uploaded_file.filename != '':
             print(f"File uploaded: {uploaded_file.filename}")
+            fn = uploaded_file.filename
             # Load the CSV file
             df = pd.read_csv(uploaded_file, encoding='latin1')
 
@@ -66,6 +69,7 @@ def process_csv():
 
                 # Calculate the Jaro-Winkler similarity between the opportunity name and the example pattern
                 similarity = jellyfish.jaro_winkler_similarity(opportunity_name, example_pattern)
+
 
                 similarity_scores.append(similarity)
                 elements_tested += 1
@@ -125,7 +129,14 @@ def calculate_average_score():
 def load_patterns():
     try:
         with open("patterns.txt", "r") as file:
-            return json.loads(file.read())
+            print("patern loaded")
+            test = []
+            for line in file:
+                test.append(line.strip())
+
+            for element in test:
+                print(element)
+                return test
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
