@@ -338,8 +338,8 @@
             <i class="fas fa-question-circle"></i>
             <span class="tooltiptext">The Pattern is what you compare the Open Field to<br><br>The tolerance is the accuracy of the comparaison to count the valid and invalid fields</span>
         </span>
-        <p><strong>Current Pattern : </strong> <span id="currentPattern">CKA/GKA - Product brand - End User / Project name - destination country - 123456</span></p>
-        <p><strong>Current Tolerance : </strong> <span id="currentTolerance">0.477</span></p>
+        <p><strong>Current Pattern : </strong> <span id="currentPattern"> {{ pattern }}</span></p>
+        <p><strong>Current Tolerance : </strong> <span id="currentTolerance">{{ tolerance }} </span></p>
     </div>
 
         <a href="/export_results" class="export-button">Export Results</a>
