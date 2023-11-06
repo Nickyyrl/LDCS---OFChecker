@@ -31,11 +31,6 @@ def get_pattern():
 def get_tolerance():
     return str(tolerance)
 
-@app.route('/get_filename')
-def get_filename():
-    return fn
-
-
 @app.route('/save_settings', methods=['POST'])
 def save_settings():
     global tolerance, example_pattern
