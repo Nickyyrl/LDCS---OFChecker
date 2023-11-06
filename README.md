@@ -1,13 +1,13 @@
-# LDCS---OFChecker
-Open field checker for Legrand Data Center Solution using Jaro-Winkler Distance.
+LDCS—OFChecker
 
-ONLY FOR OPPORTUNITIES ATM !
+Description : Open field checker for Legrand Data Center Solution using Jaro-Winkler Distance.
 
-Fixes : 
+Applicable for : Opportunities ATM (At The Moment)
 
-Pattern Addition, 
+Fixes :
 
-Column of CSV Selector if possible,
-
+	•	Pattern Addition
+	•	Column of CSV Selector (if possible)
 
 Current Version : Beta v2.0.2
+
