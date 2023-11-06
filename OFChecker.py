@@ -156,7 +156,7 @@ def save_settings_to_file(patterns):
 
 if __name__ == '__main__':
     all_patterns = load_patterns()
-    app.run(debug=True)
+    app.run()
     
 
 
