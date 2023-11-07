@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, Response
 import pandas as pd
 import jellyfish
 import json
+import webview
 
 app = Flask(__name__)
+window = webview.create_window('LDCS - OpenFields Checker', app)
 
 # Variables for tracking elements
 valid_count = 0
@@ -156,7 +158,7 @@ def save_settings_to_file(patterns):
 
 if __name__ == '__main__':
     all_patterns = load_patterns()
-    app.run()
-    
+    #app.run()
+    webview.start()
 
 
