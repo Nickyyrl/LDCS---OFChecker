@@ -123,4 +123,4 @@ Version : Beta-3.0.1
 
 ### Fixes 
 
-- 
+- Pattern Addition Inside the tool
