@@ -47,7 +47,7 @@ def save_settings():
         all_patterns.append(new_pattern)
 
     tolerance = new_tolerance
-    print(tolerance, example_pattern)
+    print("[1]Setting saved : ", tolerance, example_pattern)
 
     save_settings_to_file(all_patterns)
 
@@ -127,7 +127,7 @@ def reset_tool():
     all_elements = []
     example_pattern=" "
     tolerance = 0.5
-    
+
 
     return redirect(url_for('index'))
 
