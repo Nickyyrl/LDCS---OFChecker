@@ -110,4 +110,4 @@ LDCS - OpenFields Checker is a powerful tool for analyzing the similarity of ele
 ![OFChecker Settings](https://github.com/Nickyyrl/LDCS---OFChecker/blob/main/Templates/c2.PNG?raw=true)
 
 #### DarkMode View : 
-[ofcdm](Templates/IMG_0505.png)
+[ofcdm](Templates/IMG_0505.png?raw=true)
