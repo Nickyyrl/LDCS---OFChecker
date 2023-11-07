@@ -5,7 +5,7 @@ import json
 import webview
 
 app = Flask(__name__)
-window = webview.create_window('LDCS - OpenFields Checker', app)
+window = webview.create_window('LDCS - OpenFields Checker', app, width=1920, height=1080)
 
 # Variables for tracking elements
 valid_count = 0

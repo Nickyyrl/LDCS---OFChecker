@@ -108,8 +108,6 @@
             border-radius: 5px;
             cursor: pointer;
             position: absolute;
-            top: 213px;
-            object-position: left;
             font-size: 16px;
             
 
@@ -134,9 +132,6 @@
             border-radius: 5px;
             cursor: pointer;
             position: relative;
-            object-position: right;
-            top: -462px;
-            left: 150px;
             font-size: 16px;
     }
         .reset-button:hover {
@@ -185,10 +180,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            position: relative;
-            top: 129px;
-            object-position: left;
-            left: 315px;
+            position: relative;          
             font-size: 16px;
             
             
@@ -278,12 +270,9 @@
             filter: blur(4px);
         }
 
-        .sidebar {
-                    
-            position: relative;
-            object-position: right;
-            top: 405px;
-            right: -1525px;
+        .sidebar, .compte {
+            top: 100px;
+            transform: translateY(-50%);  
             width: 250px;
             background-color: white;
             padding: 20px;
@@ -292,6 +281,20 @@
             border-radius: 6px;
             border-color: #de1f1f; /* Taille de police plus petite */
 
+        }
+        .sidebar {
+            position: relative;
+            object-position: right;
+            right: 0; /* Changer la valeur à 0 pour aligner à droite */
+            /* ... Autres styles ... */
+        }
+
+        .compte {
+            top: -50px;
+            position: relative;
+            right: -1525px;
+            object-position: left; /* Changer la valeur à -1525px pour aligner à gauche */
+            /* ... Autres styles ... */
         }
         .tooltip {
             position: relative;
@@ -322,20 +325,6 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
             opacity: 1;
-        }
-
-        .compte{
-            position: relative;
-            top: 50px;
-            left: 20px;
-            width: 350px;
-            background-color: white;
-            padding: 20px;
-            font-size: 14px;
-            border-style: double;
-            border-radius: 6px;
-            border-color: #de1f1f;
-        
         }
 
         /* Style de la boîte de confirmation */
@@ -373,14 +362,34 @@
             animation-duration: 1s;
             animation-fill-mode: forwards;
         }
+
+        #openPopupButton, .export-button, .reset-button {
+          position: relative;
+          object-position: top;
+          transform: translate(0, -50%);
+          margin-right: 10px; /* Exemple de style pour espacer les boutons */
+          display: inline-block;
+        }
+    
+
     </style>
 </head>
 <body>
     <h1>LDCS - OpenFields Checker</h1>
-    <button id="openPopupButton">Settings</button>
     <img id="logo" src="data:image/png;base64,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">
 
-    <div class="sidebar">
+
+
+    <div class="container">
+        <form action="/process_csv" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv">
+            <input type="submit" value="Analyze CSV">
+        </form>
+                <a href="/export_results" class="export-button">Export Results</a>
+        <a href="javascript:void(0);" class="reset-button" onclick="openConfirmationModal();">Reset Tool</a>
+        <button id="openPopupButton">Settings</button>
+
+            <div class="sidebar">
 
         <h3>Current Settings</h3>
         <span class="tooltip">
@@ -415,12 +424,6 @@
             });
         </script>
     </div>
-
-    <div class="container">
-        <form action="/process_csv" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".csv">
-            <input type="submit" value="Analyze CSV">
-        </form>
         <div class="compte">
             <h3>Overall Statistic on File : </h3>
             <p><strong>Valid Count:</strong> {{ valid_count }}</p>
@@ -431,12 +434,6 @@
             <p><strong>Average Score:</strong> {{ average_score }}</p>
         </div>
         
-
-        <a href="/export_results" class="export-button">Export Results</a>
-        <a href="javascript:void(0);" class="reset-button" onclick="openConfirmationModal();">Reset Tool</a>
-        <br>
-        <br>
-        <br>
         
         
 
