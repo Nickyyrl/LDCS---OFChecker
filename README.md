@@ -97,8 +97,6 @@ Each pattern should be on a separate line.
 ### Conclusion
 LDCS - OpenFields Checker is a powerful tool for analyzing the similarity of elements in a CSV file to specific patterns. It can be useful for various data analysis and validation tasks.
 
-Version : Beta-3.0.1
-
 ### Fixes 
 
 - Pattern Addition Inside the tool
