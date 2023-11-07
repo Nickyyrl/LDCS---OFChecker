@@ -35,16 +35,13 @@ def get_tolerance():
 @app.route('/save_settings', methods=['POST'])
 def save_settings():
     global tolerance, example_pattern
-    print(tolerance, example_pattern)
 
     selected_pattern = request.form.get('selectedPattern')
-    new_pattern = request.form.get('newPatternValue')
+    
     new_tolerance = float(request.form.get('toleranceValue'))
 
     if selected_pattern:
         example_pattern = selected_pattern
-    elif new_pattern:
-        all_patterns.append(new_pattern)
 
     tolerance = new_tolerance
     print("[1]Setting saved : ", tolerance, example_pattern)

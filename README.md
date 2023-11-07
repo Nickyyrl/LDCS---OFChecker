@@ -51,28 +51,6 @@ The main dashboard of the application allows you to perform the following action
 - **Reset Tool / Réinitialiser l'outil**:
   - Reset the tool's statistics and results.
 
-### Pattern Matching / Correspondance de motifs
-
-1. **Load Patterns / Charger des motifs**:
-
-   You can load predefined patterns from the patterns.txt file. This step is optional and can help you quickly select patterns for analysis.
-
-2. **Set Pattern / Définir un motif**:
-
-   You can set a specific pattern for similarity analysis by typing it in the input field or selecting an existing pattern from the dropdown.
-
-3. **Set Tolerance / Définir une tolérance**:
-
-   Set the similarity tolerance level using the input field. This value determines how similar elements in the CSV file should be to the selected pattern to be considered valid.
-
-4. **Upload a CSV File / Télécharger un fichier CSV**:
-
-   Upload a CSV file for analysis. The application will calculate the Jaro-Winkler similarity between the elements in the CSV file and the selected pattern.
-
-5. **Reset Tool / Réinitialiser l'outil**:
-
-   Clicking this button will reset the tool's statistics, including valid and invalid counts.
-
 ### Results 
 
 After uploading a CSV file and initiating the analysis, you will see the following information on the dashboard:
@@ -108,9 +86,9 @@ Patterns are used for similarity analysis. You can load predefined patterns from
 If you want to save patterns for future use, you can manually add them to the patterns.txt file in the following format:
 
 ```plaintext
-Pattern 1
-Pattern 2
-Pattern 3
+Pattern Name 1 : Pattern
+Pattern Name 2 : Pattern
+Pattern Name 3 : Pattern
 ...
 ```
 

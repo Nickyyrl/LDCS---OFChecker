@@ -225,7 +225,7 @@
         }
 
         /* Styles for the text input */
-        #newPattern {
+        #newPattern, #newPatternName {
             width: 95%;
             padding: 10px;
             margin-bottom: 10px;
@@ -247,7 +247,7 @@
         }
 
         /* Styles for the save button */
-        #saveSettingsButton {
+        #savePatternButton, #saveSettingsButton {
             display: block;
             width: 100%;
             padding: 10px;
@@ -259,7 +259,7 @@
         }
 
         /* Hover effect for the save button */
-        #saveSettingsButton:hover {
+        #savePatternButton:hover, #saveSettingsButton:hover {
             background-color: darkred;
         }
 
@@ -370,6 +370,16 @@
           margin-right: 10px; /* Exemple de style pour espacer les boutons */
           display: inline-block;
         }
+
+        #support {
+          color: #de1f1f; /* Couleur du texte */
+          text-decoration: none; /* Supprime le soulignement du lien */
+        }
+
+        #support:hover {
+          text-decoration: underline;
+          background-color: dark; /* Ajoute un soulignement au survol du lien */
+        }
     
 
     </style>
@@ -447,6 +457,8 @@
             {% endfor %}
         </select>
         <input type="text" id="newPattern" name="new_pattern" placeholder="New Pattern..">
+        <input type="text" id="newPatternName" name="new_pattern_name" placeholder="New Pattern Name ..">
+        <button id="savePatternButton">Save Pattern</button>
         <input type="range" id="toleranceRange" name="tolerance" min="0" max="1" step="0.01" value="{{ tolerance }}">
         <p><strong>Tolerance :</strong>
         <span id="toleranceValue">{{ tolerance }}</span>
@@ -502,6 +514,9 @@
                                     toleranceValue.innerHTML = toleranceRange.value;
                                 }
 
+                
+                    
+                
         </script>
     </div>
 
