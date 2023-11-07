@@ -63,9 +63,8 @@ def process_csv():
     if 'file' in request.files:
         uploaded_file = request.files['file']
         if uploaded_file.filename != '':
-            print(f"File uploaded: {uploaded_file.filename}")
+            print(f"[1]File uploaded: {uploaded_file.filename}")
             fn = uploaded_file.filename
-            print(fn)
             df = pd.read_csv(uploaded_file, encoding='latin1')
 
 
@@ -75,7 +74,7 @@ def process_csv():
             # Iterate through the CSV rows
             for index, row in df.iterrows():
                 # Convert the 'Opportunity Name' to a string
-                opportunity_name = str(row['Opportunity Name'])
+                opportunity_name = str(row[0])
 
                 # Calculate the Jaro-Winkler similarity between the opportunity name and the example pattern
                 similarity = jellyfish.jaro_winkler_similarity(opportunity_name, example_pattern)
@@ -126,6 +125,9 @@ def reset_tool():
     last_element = ""
     last_score = 0.0
     all_elements = []
+    example_pattern=" "
+    tolerance = 0.5
+    
 
     return redirect(url_for('index'))
 
