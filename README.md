@@ -1,6 +1,6 @@
 # LDCS - OpenFields Checker
 
-![LDCS - OpenFields Checker](ldcs_openfields_checker.png)
+![LDCS - OpenFields Checker](https://raw.githubusercontent.com/Nickyyrl/LDCS---OFChecker/main/Templates/logo_ldcs-removebg-preview.ico)
 
 LDCS - OpenFields Checker is a Python web application built with Flask that allows you to check the similarity of elements in a CSV file to a specific pattern using the Jaro-Winkler similarity metric. This documentation provides information on how to install and use the program.
 
