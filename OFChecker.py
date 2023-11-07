@@ -141,13 +141,13 @@ def calculate_average_score():
 def load_patterns():
     try:
         with open("patterns.txt", "r") as file:
-            print("patern loaded")
+            
             test = []
             for line in file:
                 test.append(line.strip())
 
             for element in test:
-                print(element)
+                
                 return test
     except (FileNotFoundError, json.JSONDecodeError):
         return []
