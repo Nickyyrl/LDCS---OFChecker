@@ -72,7 +72,7 @@
             padding: 20px;
             background-color: inherit;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
         }
 
         p {
@@ -99,7 +99,7 @@
         }
 
         tr:nth-child(even) {
-            background-color: #f7b2b2;
+            background-color: var(--tr-bg-color);
         }
 
         .export-button {
@@ -149,7 +149,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: inherit;
+            background-color: rgb(0, 0, 0, 0.2);
         }
 
         .modal-content {
@@ -274,7 +274,8 @@
 
         .sidebar, .compte {
             top: 100px;
-            transform: translateY(-50%);  
+            transform: translateY(-50%);
+            transform: translate(1%);  
             width: 250px;
             background-color: inherit;
             padding: 20px;
@@ -294,7 +295,7 @@
         .compte {
             top: -50px;
             position: relative;
-            right: -1500px;
+            right: -1450px;
             object-position: left; /* Changer la valeur à -1525px pour aligner à gauche */
             /* ... Autres styles ... */
         }
@@ -387,7 +388,10 @@
             --bs-dark: #212529;
             --text-color-dark: #ffffff; /* Couleur du texte en mode sombre */
             --text-color-light: #000000;
-            --text-color: #ffffff;  /* Couleur du texte en mode clair */
+            --text-color: #ffffff;
+            --tr-bg-color-dark: #f7b2b2; /* Couleur de fond en mode sombre */
+            --tr-bg-color-light: #ffffff;
+            --tr-bg-color: #f7b2b2;   /* Couleur du texte en mode clair */
             }
 
             .theme-container {
@@ -471,7 +475,8 @@ function setLight() {
     "--bs-dark",
     "linear-gradient(318.32deg, #c3d1e4 0%, #dde7f3 55%, #d4e0ed 100%)"
   );
-  root.style.setProperty("--text-color", "var(--text-color-light)"); // Mise à jour de la couleur du texte
+  root.style.setProperty("--text-color", "var(--text-color-light)");
+  root.style.setProperty("--tr-bg-color", "var(--tr-bg-color-light)"); // Mise à jour de la couleur du texte
   container.classList.remove("shadow-dark");
   setTimeout(() => {
     container.classList.add("shadow-light");
@@ -483,7 +488,9 @@ function setLight() {
 
 function setDark() {
   root.style.setProperty("--bs-dark", "#212529");
-  root.style.setProperty("--text-color", "var(--text-color-dark)"); // Mise à jour de la couleur du texte
+  root.style.setProperty("--text-color", "var(--text-color-dark)");
+  root.style.setProperty("--tr-bg-color", "var(--tr-bg-color-dark)");
+   // Mise à jour de la couleur du texte
   container.classList.remove("shadow-light");
   setTimeout(() => {
     container.classList.add("shadow-dark");
