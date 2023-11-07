@@ -98,6 +98,8 @@ LDCS - OpenFields Checker is a powerful tool for analyzing the similarity of ele
 ### Next Features :
 
 - Pattern Addition Inside the tool
+- Sorting By Name and Score
+- Confettis 🎉
 
 ### Screenshots : 
 
