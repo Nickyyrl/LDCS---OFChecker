@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@2.1.0/canvas-confetti.min.js"></script>
+
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -439,6 +441,10 @@
               animation-duration: 1s;
               animation-direction: alternate;
             }
+
+            .score{
+                color: darkred;
+            }
     </style>
 </head>
 <body>
@@ -501,11 +507,11 @@ function setDark() {
 }
 
     </script>
-
+    <div id="confetti-container"></div>
     <div class="container">
         <form action="/process_csv" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" accept=".csv">
-            <input type="submit" value="Analyze CSV">
+            <input id="confet"type="submit" value="Analyze CSV" onclick="startConfettiAnimation();">
         </form>
                 <a href="/export_results" class="export-button">Export Results</a>
         <a href="javascript:void(0);" class="reset-button" onclick="openConfirmationModal();">Reset Tool</a>
@@ -553,7 +559,7 @@ function setDark() {
             <p><strong>Elements Tested:</strong> {{ elements_tested }}</p>
             <p><strong>Last Element Tested:</strong> {{ last_element }}</p>
             <p><strong>Last Score:</strong> {{ last_score }}</p>
-            <p><strong>Average Score:</strong> {{ average_score }}</p>
+            <h4 class="score"><strong>AVG Accuracy Score:</strong></h4> <span>{{ average_score }}</span>
         </div>
         
         
@@ -658,6 +664,44 @@ function setDark() {
         </div>
 </body>
 <script>
+            // Fonction pour démarrer l'animation de confettis
+        function startConfettiAnimation() {
+            particlesJS('confetti-container', {
+                particles: {
+                    number: {
+                        value: 200,
+                    },
+                    shape: {
+                        type: 'circle',
+                    },
+                    size: {
+                        value: 5,
+                    },
+                    move: {
+                        direction: 'random',
+                        out_mode: 'out',
+                    },
+                    line_linked: {
+                        enable: false,
+                    },
+                },
+            });
+        }
+
+function loadCSV() {
+  // Effectuez le chargement du fichier CSV
+  // Une fois le chargement est terminé, appelez la fonction pour démarrer l'animation de confetti
+  simulateCSVLoading(); // Exemple de fonction de chargement simulée (adaptez-la à votre cas)
+}
+
+function simulateCSVLoading() {
+  // Simulation de chargement du fichier CSV (vous devrez adapter cette partie)
+  setTimeout(function() {
+    // Appeler la fonction pour démarrer l'animation de confetti après le chargement
+    startConfettiAnimation();
+  }, 2000); // Exemple de délai simulé (2 secondes)
+}
+       
     
 function openConfirmationModal() {
     var modal = document.getElementById('confirmation-modal');
