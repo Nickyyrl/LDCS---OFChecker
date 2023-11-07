@@ -98,3 +98,8 @@ LDCS - OpenFields Checker is a powerful tool for analyzing the similarity of ele
 ### Next Features :
 
 - Pattern Addition Inside the tool
+
+### Screenshots : 
+
+![OFChecker](https://github.com/Nickyyrl/LDCS---OFChecker/blob/main/Templates/c1.PNG?raw=true)
+![OFChecker Settings](https://github.com/Nickyyrl/LDCS---OFChecker/blob/main/Templates/c2.PNG?raw=true)
