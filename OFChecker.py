@@ -129,6 +129,21 @@ def reset_tool():
     return redirect(url_for('index'))
 
 
+@app.route('/save_pattern', methods=['POST'])
+def save_pattern():
+    data = request.get_json()
+
+    # Récupérer les données du formulaire
+    new_pattern = data['newPatternValue']
+    new_pattern_name = data['newPatternNameValue']
+
+    # Enregistrer les données dans un fichier "patterns.txt"
+    with open("patterns.txt", "a") as file:
+        file.write(f"{new_pattern_name}: {new_pattern}\n")
+
+    return jsonify({'message': 'Pattern enregistré avec succès'})
+
+
 def calculate_average_score():
     if all_elements:
         total_score = sum(item['score'] for item in all_elements)
@@ -158,6 +173,10 @@ def save_settings_to_file(patterns):
 if __name__ == '__main__':
     all_patterns = load_patterns()
     app.run()
+<<<<<<< Updated upstream
     #webview.start()
+=======
+    webview.start()
+>>>>>>> Stashed changes
 
 

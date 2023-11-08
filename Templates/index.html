@@ -574,17 +574,23 @@ function setDark() {
                 <option value="{{ pattern }}">{{ pattern }}</option>
             {% endfor %}
         </select>
-        <input type="text" id="newPattern" name="new_pattern" placeholder="New Pattern..">
-        <input type="text" id="newPatternName" name="new_pattern_name" placeholder="New Pattern Name ..">
-        <button id="savePatternButton">Save Pattern</button>
         <input type="range" id="toleranceRange" name="tolerance" min="0" max="1" step="0.01" value="{{ tolerance }}">
         <p><strong>Tolerance :</strong>
         <span id="toleranceValue">{{ tolerance }}</span>
         <br>
         <br>
         <button id="saveSettingsButton" type="button">Save Settings</button>
+        <button id="addPatternButton">Add pattern</button>
         <a href="https://github.com/Nickyyrl/LDCS---OFChecker" target="_blank" id="support">Support on GitHub 🖳</a>
-        
+
+        <div id="addPatternPopup" class="popup" style="display: none;">
+    <h2>Ajouter un pattern</h2>
+    <form id="addPatternForm">
+        <input type="text" id="newPattern" name="new_pattern" placeholder="New Pattern..">
+        <input type="text" id="newPatternName" name="new_pattern_name" placeholder="New Pattern Name ..">
+        <button id="savePatternButton">Save Pattern</button>
+    </form>
+</div>
         <script type="text/javascript">
             // JavaScript pour gérer la pop-up
             var popup = document.getElementById("popup");
@@ -599,17 +605,19 @@ function setDark() {
                 popup.style.display = "block";
             }
 
+                addPatternButton.onclick = function() {
+                    addPatternPopup.style.display = "block";
+                }
+
             saveSettingsButton.onclick = function() {
                 // Récupérer les valeurs de la pop-up
                 var selectedPattern = patternSelect.value;
-                var newPatternValue = newPattern.value;
                 var toleranceValue = toleranceRange.value;
 
 
                 // Envoyer les valeurs au serveur (vous devez ajouter cette partie côté serveur)
                     $.post('/save_settings', {
                         selectedPattern: selectedPattern,
-                        newPatternValue: newPatternValue,
                         toleranceValue: toleranceValue
                     }, function(data) {
                         // Optionnel : Gérer la réponse du serveur (par exemple, afficher un message de confirmation)
@@ -626,11 +634,36 @@ function setDark() {
                                     // Masquer la pop-up
                                     popup.style.display = "none";
                                 }
+            addPatternForm.onsubmit = function(e) {
+                e.preventDefault();
+                var newPatternValue = newPattern.value;
+                var newPatternNameValue = newPatternName.value;
 
-                                // Mettre à jour la valeur de tolérance en temps réel
-                                toleranceRange.oninput = function() {
-                                    toleranceValue.innerHTML = toleranceRange.value;
-                                }
+                $.post('/save_pattern', {
+                    newPatternValue: newPatternValue,
+                    newPatternNameValue: newPatternNameValue,
+                }, function(data) {
+                    // Optionnel : Gérer la réponse du serveur (par exemple, afficher un message de confirmation)
+                    var confirmationMessage = document.getElementById('confirmationMessage');
+                        confirmationMessage.style.display = 'block';
+
+                        // Masquer la pop-up après un court délai (par exemple, 2 secondes)
+                        setTimeout(function() {
+                            confirmationMessage.style.display = 'none';
+                            popup.style.display = 'none';
+                        }, 2000); // 2000 millisecondes (2 secondes)
+
+                                    });
+                                // Masquer la pop-up
+                                popup.style.display = "none";
+                            }
+                              
+                                
+
+                            // Mettre à jour la valeur de tolérance en temps réel
+                            toleranceRange.oninput = function() {
+                                toleranceValue.innerHTML = toleranceRange.value;
+                            }
 
                 
                     
